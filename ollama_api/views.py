@@ -1,16 +1,12 @@
-from typing import Union
-
 import ollama
-from django.http import HttpResponseNotAllowed, HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseNotAllowed, HttpResponse, HttpRequest
 
 from ollama_api import config
 from ollama_api.config import DEFAULT_MODEL
 from ollama_api.utils import async_model_pull
 
 
-@csrf_exempt
-def select_model(request) -> Union[JsonResponse, HttpResponse]:
+def select_model(request: HttpRequest) -> HttpResponse:
     if request.method != "GET":
         return HttpResponseNotAllowed(['GET'])
 

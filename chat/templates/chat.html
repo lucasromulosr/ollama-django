@@ -150,6 +150,7 @@
   </style>
 </head>
 <body>
+  {% csrf_token %}
 
   <div id="chat-container"></div>
 
@@ -160,6 +161,24 @@
 
   <input type="text" id="model-selector" placeholder="Model name (defaults to llama3)">
 
+  <script>
+    function getCookie(name) {
+      const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name + '='))
+        ?.split('=')[1];
+      return cookieValue;
+    }
+
+    // Setup jQuery to include CSRF token in all AJAX requests
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!(/^GET|HEAD|OPTIONS|TRACE$/i.test(settings.type))) {
+          xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+        }
+      }
+    });
+  </script>
   <script>
     $(document).ready(function () {
       const $chatContainer = $("#chat-container");
@@ -221,6 +240,7 @@
         const xhr = new XMLHttpRequest();
         xhr.open("POST", chatEndpoint, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
 
         let lastLength = 0;
         xhr.onprogress = function () {

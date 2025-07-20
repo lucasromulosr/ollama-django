@@ -22,6 +22,7 @@ if [ -f requirements.txt ]; then
 fi
 
 echo "Starting Django dev webserver..."
+python3 manage.py migrate >> django.log 2>&1 &
 python3 manage.py runserver >> django.log 2>&1 &
 DJANGO_PID=$!
 trap "kill $DJANGO_PID" EXIT

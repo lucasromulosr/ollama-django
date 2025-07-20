@@ -1,0 +1,2 @@
+DEFAULT_MODEL = 'llama3'
+LAST_MODEL = None

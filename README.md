@@ -16,41 +16,34 @@ This Django project showcases the power of building local AI-powered chat applic
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/scoutapp/ollama-django
-   cd your-repo-name
+   cd ollama-django
 
-2. **Start Ollama: (If you haven't already)**
+2. **Install Dependencies:**
    ```bash
-   docker pull ollama/ollama
-   docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-   docker exec -it ollama ollama run llama3
+   chmod +x install.sh
+   ./install.sh
 
-3. **Set Up Virtual Environment:**
+3. **Run Ollama Chat:**
    ```bash
-   python3 -m venv env
-   source env/bin/activate
+   chmod +x run.sh
+   ./run.sh
+   ```
+   > use --install flag will check and install dependencies (if needed) before running
 
-4. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt 
+**Chat Away:** Open your browser and visit http://localhost:8000/ or http://localhost:8000/chat/ to start chatting with your AI
 
-5. **Run the Server:**
-   ```bash
-   python manage.py runserver
-
-**Chat Away:** Open your browser and visit http://localhost:8000/chat/ to start chatting with your AI
-
-**Project Structure**
-
-chat/: Contains the Django app for the chat interface and Ollama interaction.
-templates/: HTML template for the chat interface.
-requirements.txt: Lists the project dependencies.
+[//]: # (**Project Structure**)
+[//]: # (chat/: Contains the Django app for the chat interface and Ollama interaction.)
+[//]: # (templates/: HTML template for the chat interface.)
+[//]: # (requirements.txt: Lists the project dependencies.)
 
 **Future Enhancements**
 
-Improved Styling: CSS enhancements for a more visually appealing chat interface.
-Reduced Latency: Optimization techniques to minimize response delays.
-Additional Models: Integration of other Ollama-supported models.
-Multimodal AI: Exploration of combining text with images and audio.
+Frontend refactoring: frontend written by a backend dev + ChatGPT. \
+Reduced Latency: Optimization techniques to minimize response delays. \
+Multimodal AI: Exploration of combining text with images and audio. 
+
+[//]: # (Additional Models: Integration of other Ollama-supported models.)
 
 **Contributing**
 
@@ -62,5 +55,4 @@ Contributions are welcome! Feel free to open issues, submit pull requests, or sh
 
 [Django](https://www.djangoproject.com): For the excellent web development framework.
 
-[Llama 3](https://llama.meta.com/llama3): The open-source AI model that powers this chat app.
-
+[//]: # ([Llama 3]&#40;https://llama.meta.com/llama3&#41;: The open-source AI model that powers this chat app.)

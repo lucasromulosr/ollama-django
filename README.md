@@ -39,7 +39,8 @@ This Django project showcases the power of building local AI-powered chat applic
 
 **Future Enhancements**
 
-Frontend refactoring: frontend written by a backend dev + ChatGPT. \
+Frontend refactoring: Frontend written by a backend dev + ChatGPT. \
+Model selection: Add a dropdown selector with model choices. \
 Reduced Latency: Optimization techniques to minimize response delays. \
 Multimodal AI: Exploration of combining text with images and audio. 
 

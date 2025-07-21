@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Ollama Chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
@@ -118,8 +119,7 @@
 
     #model-selector {
       width: 250px;
-      {#padding: 8px;#}
-      {#margin-bottom: 16px;#}
+      margin-left: 16px;
       background-color: #222;
       color: white;
       border: 1px solid #555;
@@ -187,7 +187,15 @@
 
   <div>
     <button id="context-clear-button" type="button">clear context</button>
+
     <input type="text" id="model-selector" placeholder="Model name (defaults to llama3)">
+
+    <i class="fas fa-info-circle"
+      title=
+"The model name is sent along with the input. If blank, defaults to DEFAULT_MODEL configured in the backend.
+Model choices can be found in https://ollama.com/library/."
+      style="cursor: help; color: #ccc; font-weight: bold;">
+    </i>
   </div>
 
   <script>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import StreamingHttpResponse, HttpResponseNotAllowed
+from django.http import StreamingHttpResponse, HttpResponseNotAllowed, HttpRequest, HttpResponse
 
-from chat.message_history import append_message_history, get_message_history
+from chat.message_history import append_message_history, get_message_history, clear_message_history
 from ollama_api.utils import generate_response
 
 
@@ -36,3 +36,10 @@ def chat_view(request):
         )
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
+
+
+def clear_chat_context(request: HttpRequest) -> HttpResponse:
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+    clear_message_history(request.session)
+    return HttpResponse(status=200)

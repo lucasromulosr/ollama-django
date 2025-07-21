@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 from ollama_api.urls import urlpatterns as ollama_urlpatterns
-from chat.views import chat_view
+from chat.urls import urlpatterns as chat_urlpatterns
 
 urlpatterns = [
-    path('', chat_view, name='home'),
-    path('chat/', chat_view, name='chat'),
+    path('', RedirectView.as_view(url='chat'), name='home'),
+    path('chat/', include(chat_urlpatterns)),
     path('ollama/', include(ollama_urlpatterns)),
 ]

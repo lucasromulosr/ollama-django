@@ -17,3 +17,8 @@ def append_message_history(session: SessionStore, role: str, content: str):
         'role': role, 'content': content
     })
     session.save()
+
+
+def clear_message_history(session: SessionStore):
+    session[MESSAGE_HISTORY] = []
+    session.save()

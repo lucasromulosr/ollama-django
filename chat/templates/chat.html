@@ -18,7 +18,7 @@
 
     #chat-container {
       width: 80%;
-      height: 80vh;
+      height: 75vh;
       margin: 20px auto;
       background: #1e1e1e;
       border-radius: 10px;
@@ -90,6 +90,32 @@
       background-color: #1565c0;
     }
 
+    #context-clear-button {
+      background-color: darkred;
+      color: white;
+      border: 1px solid white;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    #context-clear-button:hover {
+      background-color: red;
+    }
+
+    #context-clear-popup {
+      display: none;
+      position: fixed;
+      justify-content: center;
+      top: 50px;
+      background-color: #333;
+      color: #fff;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 8px;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
     #model-selector {
       width: 250px;
       {#padding: 8px;#}
@@ -159,7 +185,10 @@
     <button id="send-button" type="submit">Send</button>
   </form>
 
-  <input type="text" id="model-selector" placeholder="Model name (defaults to llama3)">
+  <div>
+    <button id="context-clear-button" type="button">clear context</button>
+    <input type="text" id="model-selector" placeholder="Model name (defaults to llama3)">
+  </div>
 
   <script>
     function getCookie(name) {
@@ -282,6 +311,35 @@
       }
     });
   </script>
+  <script>
+    function contextClearPopup(message, isSuccess) {
+      if (!$("#context-clear-popup").length) {
+        $("body").append(`<div id='context-clear-popup'></div>`);
+      }
+      const popup = $('#context-clear-popup');
+      popup.text(message);
+      popup.css('background-color', isSuccess ? '#28a745' : '#dc3545');
+      popup.fadeIn(200);
 
+      setTimeout(() => {
+        popup.fadeOut(400);
+      }, 1000);
+    }
+    $(document).ready(function () {
+      $("#context-clear-button").click(function (e) {
+        const contextClearEndpoint = "/chat/context/clear/";
+        $.ajax({
+          url: contextClearEndpoint,
+          type: 'POST',
+          success: function (response) {
+            contextClearPopup('Context cleared.', true);
+          },
+          error: function (xhr) {
+            contextClearPopup('Error clearing context.', false);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
